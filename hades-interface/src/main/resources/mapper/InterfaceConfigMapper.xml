@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceConfigMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="config_type" jdbcType="VARCHAR" property="configType" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="service_id" jdbcType="INTEGER" property="serviceId" />
+    <result column="env_config_id" jdbcType="VARCHAR" property="envConfigId" />
+    <result column="sql_text" jdbcType="VARCHAR" property="sqlText" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="old_id" jdbcType="INTEGER" property="oldId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orders, case_id, config_type, position, service_id, env_config_id, sql_text, 
+    create_time, creator, updator, update_time, old_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interface_config
+    where status = 0 and id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getByCondition"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from interface_config
+    where status = 0
+    <if test="id!=null">
+      AND case_id = #{id}
+    </if>
+    order by orders ASC
+  </select>
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>-->
+
+  <update id="deleteByPrimaryKey">
+    UPDATE interface_config
+    SET status = -99 where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfig" useGeneratedKeys="true" keyProperty="id">
+    insert into interface_config (id, orders, case_id, 
+      config_type, position, service_id, 
+      env_config_id, sql_text, create_time, 
+      creator, updator, update_time, 
+      old_id)
+    values (#{id,jdbcType=INTEGER}, #{orders,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, 
+      #{configType,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{serviceId,jdbcType=INTEGER}, 
+      #{envConfigId,jdbcType=VARCHAR}, #{sqlText,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{updator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{oldId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfig">
+    insert into interface_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="configType != null">
+        config_type,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="serviceId != null">
+        service_id,
+      </if>
+      <if test="envConfigId != null">
+        env_config_id,
+      </if>
+      <if test="sqlText != null">
+        sql_text,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="updator != null">
+        updator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="oldId != null">
+        old_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="configType != null">
+        #{configType,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceId != null">
+        #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="envConfigId != null">
+        #{envConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlText != null">
+        #{sqlText,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldId != null">
+        #{oldId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfig">
+    update interface_config
+    <set>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="configType != null">
+        config_type = #{configType,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null and position!=''">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceId != null">
+        service_id = #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="envConfigId != null">
+        env_config_id = #{envConfigId,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlText != null">
+        sql_text = #{sqlText,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="updator != null">
+        updator = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldId != null">
+        old_id = #{oldId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfig">
+    update interface_config
+    set orders = #{orders,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=INTEGER},
+      config_type = #{configType,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      service_id = #{serviceId,jdbcType=INTEGER},
+      env_config_id = #{envConfigId,jdbcType=VARCHAR},
+      sql_text = #{sqlText,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      updator = #{updator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      old_id = #{oldId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="getConfigMaxOrders" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select IFNULL(max(orders),0) from interface_config
+    where status =0 and  case_id = #{caseId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectOne" resultMap="BaseResultMap">
+    select id, create_time, creator, update_time, updator, orders, case_id,
+    config_type, position, service_id, env_config_id, sql_text
+    from interface_config where status = 0
+    <if test="caseId != null">
+      and case_id = #{caseId}
+    </if>
+    <if test="orders != null and orders != ''">
+      and orders = #{orders}
+    </if>
+  </select>
+</mapper>

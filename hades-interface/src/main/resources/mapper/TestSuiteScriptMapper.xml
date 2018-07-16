@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.TestSuiteScriptMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.TestSuiteScript">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="suite_id" jdbcType="INTEGER" property="suiteId" />
+    <result column="script_id" jdbcType="INTEGER" property="scriptId" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="request_message" jdbcType="VARCHAR" property="requestMessage" />
+    <result column="response_message" jdbcType="VARCHAR" property="responseMessage" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="execute_time" jdbcType="BIGINT" property="executeTime" />
+    <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+    <result column="executor" jdbcType="VARCHAR" property="executor" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, suite_id, script_id, result, request_message, response_message, begin_time, end_time, 
+    status, execute_time, interface_name, executor, batch_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_suite_script
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test_suite_script
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.TestSuiteScript">
+    insert into test_suite_script (id, suite_id, script_id, 
+      result, request_message, response_message, 
+      begin_time, end_time, status, 
+      execute_time, interface_name, executor, 
+      batch_no)
+    values (#{id,jdbcType=INTEGER}, #{suiteId,jdbcType=INTEGER}, #{scriptId,jdbcType=INTEGER}, 
+      #{result,jdbcType=VARCHAR}, #{requestMessage,jdbcType=VARCHAR}, #{responseMessage,jdbcType=VARCHAR}, 
+      #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{executeTime,jdbcType=BIGINT}, #{interfaceName,jdbcType=VARCHAR}, #{executor,jdbcType=VARCHAR}, 
+      #{batchNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.TestSuiteScript">
+    insert into test_suite_script
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="suiteId != null">
+        suite_id,
+      </if>
+      <if test="scriptId != null">
+        script_id,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="requestMessage != null">
+        request_message,
+      </if>
+      <if test="responseMessage != null">
+        response_message,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="executeTime != null">
+        execute_time,
+      </if>
+      <if test="interfaceName != null">
+        interface_name,
+      </if>
+      <if test="executor != null">
+        executor,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="suiteId != null">
+        #{suiteId,jdbcType=INTEGER},
+      </if>
+      <if test="scriptId != null">
+        #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMessage != null">
+        #{requestMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="responseMessage != null">
+        #{responseMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="executeTime != null">
+        #{executeTime,jdbcType=BIGINT},
+      </if>
+      <if test="interfaceName != null">
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="executor != null">
+        #{executor,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.TestSuiteScript">
+    update test_suite_script
+    <set>
+      <if test="suiteId != null">
+        suite_id = #{suiteId,jdbcType=INTEGER},
+      </if>
+      <if test="scriptId != null">
+        script_id = #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMessage != null">
+        request_message = #{requestMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="responseMessage != null">
+        response_message = #{responseMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="executeTime != null">
+        execute_time = #{executeTime,jdbcType=BIGINT},
+      </if>
+      <if test="interfaceName != null">
+        interface_name = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="executor != null">
+        executor = #{executor,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.TestSuiteScript">
+    update test_suite_script
+    set suite_id = #{suiteId,jdbcType=INTEGER},
+      script_id = #{scriptId,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      request_message = #{requestMessage,jdbcType=VARCHAR},
+      response_message = #{responseMessage,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      execute_time = #{executeTime,jdbcType=BIGINT},
+      interface_name = #{interfaceName,jdbcType=VARCHAR},
+      executor = #{executor,jdbcType=VARCHAR},
+      batch_no = #{batchNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

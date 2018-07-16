@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceInfoMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="service_id" jdbcType="INTEGER" property="serviceId" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    *
+    from interface_info
+    where id = #{id,jdbcType=INTEGER}
+    and status=0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" >
+    insert into interface_info (id, service_id, version,creator, create_time, update_time,updater, status,interface_name)
+    values (#{id,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},#{interfaceName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceInfo">
+    insert into interface_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serviceId != null">
+        service_id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serviceId != null">
+        #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceInfo">
+    update interface_info
+    <set>
+      <if test="serviceId != null">
+        service_id = #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+
+      <if test="interfaceName != null">
+        interface_name = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceInfo">
+    update interface_info
+    set service_id = #{serviceId,jdbcType=INTEGER},
+      version = #{version,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getTotal" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+     select COUNT(*)   from interface_info    where status=0
+  </select>
+
+  <select id="getInterfaceInfoList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from interface_info
+    where service_id = #{serviceId,jdbcType=INTEGER}
+    AND status=0
+  </select>
+
+  <select id="getQueryList"  resultType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceQueryBean">
+    SELECT C.id AS id, C.creator AS creator,C.interface_name AS interfaceName,C.create_time AS createTime,A.version AS version,B.id AS systemId ,B.system_name AS systemName,
+    A.id as serviceId,A.service_name AS serviceName FROM
+    `services` AS A,systems AS B,interface_info AS C
+    where A.id=#{serviceId,jdbcType=INTEGER} and A.id=C.service_id and B.id=A.system_id AND C.status=0
+    ORDER BY C.id DESC
+  </select>
+
+    <select id="getInterfaceInfo" resultMap="BaseResultMap">
+        select  *
+        from interface_info
+        where  status=0
+        ORDER BY create_time DESC limit 1
+    </select>
+
+  <select id="getInterfaceList" resultMap="BaseResultMap">
+    select  *  from interface_info
+    where  status=0
+    AND service_id=#{serviceId,jdbcType=INTEGER}
+  </select>
+
+  <select id="listAll"  resultType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceQueryBean">
+    SELECT C.id AS id, C.creator AS creator,C.interface_name AS interfaceName,C.create_time AS createTime,A.version AS version,B.id AS systemId ,B.system_name AS systemName,
+    A.id as serviceId,A.service_name AS serviceName FROM
+    `services` AS A,systems AS B,interface_info AS C
+    where  A.id=C.service_id and B.id=A.system_id     AND C.status=0
+    ORDER BY C.id DESC
+  </select>
+</mapper>

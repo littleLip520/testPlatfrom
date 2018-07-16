@@ -1,0 +1,58 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.4.2",
+    "babel-eslint": "^8.2.3",
+    "draftjs-to-html": "^0.8.4",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.1.1",
+    "lodash": "^4.17.10",
+    "mobx": "^4.2.0",
+    "mobx-react": "^5.0.0",
+    "moment": "^2.22.2",
+    "prettier": "^1.12.1",
+    "promise-polyfill": "7.1.2",
+    "react": "^16.3.2",
+    "react-app-rewire-mobx": "^1.0.8",
+    "react-dom": "^16.3.2",
+    "react-draft-wysiwyg": "^1.12.13",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4",
+    "whatwg-fetch": "^2.0.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject",
+    "lint": "eslint --fix ./src"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-react": "^7.7.0",
+    "react-app-rewire-less": "^2.1.1",
+    "react-app-rewired": "^1.5.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "document": true,
+      "window": true
+    }
+  }
+}

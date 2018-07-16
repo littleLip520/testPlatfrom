@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceCheckpointMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceCheckpoint">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="check_field" jdbcType="VARCHAR" property="checkField" />
+    <result column="check_type" jdbcType="VARCHAR" property="checkType" />
+    <result column="expected_result" jdbcType="VARCHAR" property="expectedResult" />
+    <result column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="flag" jdbcType="CHAR" property="flag" />
+    <result column="sql_query" jdbcType="VARCHAR" property="sqlQuery" />
+    <result column="env_config_id" jdbcType="INTEGER" property="envConfigId" />
+    <result column="interface_case_id" jdbcType="INTEGER" property="interfaceCaseId" />
+    <result column="date_change_last_time" jdbcType="TIMESTAMP" property="dateChangeLastTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, check_field, check_type, expected_result, row_id, flag, sql_query, env_config_id, 
+    interface_case_id, date_change_last_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interface_checkpoint
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_checkpoint
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceCheckpoint">
+    insert into interface_checkpoint (id, check_field, check_type, 
+      expected_result, row_id, flag, 
+      sql_query, env_config_id, interface_case_id, 
+      date_change_last_time)
+    values (#{id,jdbcType=INTEGER}, #{checkField,jdbcType=VARCHAR}, #{checkType,jdbcType=VARCHAR}, 
+      #{expectedResult,jdbcType=VARCHAR}, #{rowId,jdbcType=INTEGER}, #{flag,jdbcType=CHAR}, 
+      #{sqlQuery,jdbcType=VARCHAR}, #{envConfigId,jdbcType=INTEGER}, #{interfaceCaseId,jdbcType=INTEGER}, 
+      #{dateChangeLastTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceCheckpoint">
+    insert into interface_checkpoint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="checkField != null">
+        check_field,
+      </if>
+      <if test="checkType != null">
+        check_type,
+      </if>
+      <if test="expectedResult != null">
+        expected_result,
+      </if>
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="sqlQuery != null">
+        sql_query,
+      </if>
+      <if test="envConfigId != null">
+        env_config_id,
+      </if>
+      <if test="interfaceCaseId != null">
+        interface_case_id,
+      </if>
+      <if test="dateChangeLastTime != null">
+        date_change_last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="checkField != null">
+        #{checkField,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null">
+        #{checkType,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedResult != null">
+        #{expectedResult,jdbcType=VARCHAR},
+      </if>
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=CHAR},
+      </if>
+      <if test="sqlQuery != null">
+        #{sqlQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="envConfigId != null">
+        #{envConfigId,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceCaseId != null">
+        #{interfaceCaseId,jdbcType=INTEGER},
+      </if>
+      <if test="dateChangeLastTime != null">
+        #{dateChangeLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByCondition" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceCheckpoint">
+    update interface_checkpoint
+    <set>
+      <if test="checkField != null">
+        check_field = #{checkField,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null">
+        check_type = #{checkType,jdbcType=VARCHAR},
+      </if>
+      <if test="expectedResult != null">
+        expected_result = #{expectedResult,jdbcType=VARCHAR},
+      </if>
+      <if test="rowId != null">
+        row_id = #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="sqlQuery != null">
+        sql_query = #{sqlQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="envConfigId != null">
+        env_config_id = #{envConfigId,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceCaseId != null">
+        interface_case_id = #{interfaceCaseId,jdbcType=INTEGER},
+      </if>
+      <if test="dateChangeLastTime != null">
+        date_change_last_time = #{dateChangeLastTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceCheckpoint">
+    update interface_checkpoint
+    set check_field = #{checkField,jdbcType=VARCHAR},
+      check_type = #{checkType,jdbcType=VARCHAR},
+      expected_result = #{expectedResult,jdbcType=VARCHAR},
+      row_id = #{rowId,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=CHAR},
+      sql_query = #{sqlQuery,jdbcType=VARCHAR},
+      env_config_id = #{envConfigId,jdbcType=INTEGER},
+      interface_case_id = #{interfaceCaseId,jdbcType=INTEGER},
+      date_change_last_time = #{dateChangeLastTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

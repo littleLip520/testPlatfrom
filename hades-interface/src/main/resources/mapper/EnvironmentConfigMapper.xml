@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.EnvironmentConfigMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.EnvironmentConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="config_name" jdbcType="VARCHAR" property="configName" />
+    <result column="config_type" jdbcType="VARCHAR" property="configType" />
+    <result column="db_type" jdbcType="VARCHAR" property="dbType" />
+    <result column="db_name" jdbcType="VARCHAR" property="dbName" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="conn_url" jdbcType="VARCHAR" property="connUrl" />
+    <result column="creat_user" jdbcType="VARCHAR" property="creatUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,config_name,config_type, db_type, db_name, c_name, user_name, password, ip, port, conn_url,
+    creat_user, create_time, update_user, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from environment_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from environment_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.EnvironmentConfig">
+    insert into environment_config (id,config_name, config_type, db_type,
+      db_name, c_name, user_name, 
+      password, ip, port, 
+      conn_url, creat_user, create_time, remark,status
+      )
+    values (#{id,jdbcType=INTEGER},#{configName,jdbcType=VARCHAR}, #{configType,jdbcType=VARCHAR}, #{dbType,jdbcType=VARCHAR},
+      #{dbName,jdbcType=VARCHAR}, #{cName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{connUrl,jdbcType=VARCHAR}, #{creatUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR},#{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.EnvironmentConfig">
+    insert into environment_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="configType != null">
+        config_type,
+      </if>
+      <if test="dbType != null">
+        db_type,
+      </if>
+      <if test="dbName != null">
+        db_name,
+      </if>
+      <if test="cName != null">
+        c_name,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="connUrl != null">
+        conn_url,
+      </if>
+      <if test="creatUser != null">
+        creat_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="configType != null">
+        #{configType,jdbcType=VARCHAR},
+      </if>
+      <if test="dbType != null">
+        #{dbType,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="connUrl != null">
+        #{connUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="creatUser != null">
+        #{creatUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByCondition" parameterType="com.xforceplus.hades.interfaceMgmt.domain.EnvironmentConfig">
+    update environment_config
+    <set>
+      <if test="configName != null">
+        config_name = #{configName,jdbcType=VARCHAR},
+      </if>
+      <if test="configType != null">
+        config_type = #{configType,jdbcType=VARCHAR},
+      </if>
+      <if test="dbType != null">
+        db_type = #{dbType,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        db_name = #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="connUrl != null">
+        conn_url = #{connUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="creatUser != null">
+        creat_user = #{creatUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.EnvironmentConfig">
+    update environment_config
+    set config_type = #{configType,jdbcType=VARCHAR},
+      db_type = #{dbType,jdbcType=VARCHAR},
+      db_name = #{dbName,jdbcType=VARCHAR},
+      c_name = #{cName,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      port = #{port,jdbcType=VARCHAR},
+      conn_url = #{connUrl,jdbcType=VARCHAR},
+      creat_user = #{creatUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getEnvironmentList"  resultType="com.xforceplus.hades.interfaceMgmt.domain.BriefEnvInfo">
+    select id,config_name as configName,config_type as configType,db_name as dbName,c_name as cName,user_name as userName,ip,port,conn_url as connUrl,remark
+    from environment_config
+    where status = 0
+  </select>
+
+  <select id="getEnvironmentCount"  resultType="java.lang.Integer">
+    select count(*)
+    from environment_config
+    where status = 0
+  </select>
+  <select id="listAll"  resultMap="BaseResultMap">
+    select *
+    from environment_config
+    where status = 0
+  </select>
+</mapper>

@@ -1,0 +1,44 @@
+.base-setting, .productMgr{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 30px;
+  display: block;
+  &-tabs{
+    text-align: center;
+    width: 75%;
+    margin-left:auto;
+    margin-right: auto;
+  }
+  .product, .customer, .system, .service, .product-name,.user-manage, .role-auth{
+    //margin-top: 30px;
+
+    text-align: left;
+    .add-product-btn{
+      margin-top: 20px;
+      margin-bottom: 5px;
+    }
+    .editable-input{
+      text-align: center;
+    }
+  }
+}
+
+.product-name, .user-manage{
+    display: block;
+    .ant-form-item-children, .ant-select-selection{
+      min-width: 200px;
+  }
+}
+
+.role-auth{
+  .ant-select-selection{
+    min-width: 200px;
+  }
+  .auth-options{
+    border: solid 1px #e8e8e8;
+    padding: 2px;
+    margin-right: 5px;
+    background-color: #fafafa;
+  }
+}
+

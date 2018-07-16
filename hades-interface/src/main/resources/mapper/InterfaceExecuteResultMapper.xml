@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceExecuteResultMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceExecuteResult">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="run_shedule_id" jdbcType="INTEGER" property="runSheduleId" />
+    <result column="run_time" jdbcType="BIGINT" property="runTime" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+    <result column="executor_id" jdbcType="VARCHAR" property="executorId" />
+    <result column="executor" jdbcType="VARCHAR" property="executor" />
+    <result column="log_field" jdbcType="VARCHAR" property="logField" />
+    <result column="evn_id" jdbcType="INTEGER" property="evnId" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="check_point_status" jdbcType="VARCHAR" property="checkPointStatus" />
+    <result column="request_message" jdbcType="LONGVARCHAR" property="requestMessage" />
+    <result column="return_message" jdbcType="LONGVARCHAR" property="returnMessage" />
+    <result column="error_message" jdbcType="LONGVARCHAR" property="errorMessage" />
+
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    id, run_shedule_id, run_time, begin_time, end_time, status, case_id, interface_name, 
+    executor_id, executor, log_field, evn_id, batch_no, check_point_status
+  </sql>
+  <sql id="Blob_Column_List">
+    request_message, return_message, error_message
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from interface_execute_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_execute_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceExecuteResult">
+    insert into interface_execute_log (id, run_shedule_id, run_time, 
+      begin_time, end_time, status, 
+      case_id, interface_name, executor_id, 
+      executor, log_field, evn_id, 
+      batch_no, check_point_status, request_message, 
+      return_message, error_message)
+    values (#{id,jdbcType=INTEGER}, #{runSheduleId,jdbcType=INTEGER}, #{runTime,jdbcType=BIGINT}, 
+      #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=INTEGER}, #{interfaceName,jdbcType=VARCHAR}, #{executorId,jdbcType=VARCHAR}, 
+      #{executor,jdbcType=VARCHAR}, #{logField,jdbcType=VARCHAR}, #{evnId,jdbcType=INTEGER}, 
+      #{batchNo,jdbcType=VARCHAR}, #{checkPointStatus,jdbcType=VARCHAR}, #{requestMessage,jdbcType=LONGVARCHAR}, 
+      #{returnMessage,jdbcType=LONGVARCHAR}, #{errorMessage,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceExecuteResult">
+    insert into interface_execute_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="runSheduleId != null">
+        run_shedule_id,
+      </if>
+      <if test="runTime != null">
+        run_time,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="interfaceName != null">
+        interface_name,
+      </if>
+      <if test="executorId != null">
+        executor_id,
+      </if>
+      <if test="executor != null">
+        executor,
+      </if>
+      <if test="logField != null">
+        log_field,
+      </if>
+      <if test="evnId != null">
+        evn_id,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="checkPointStatus != null">
+        check_point_status,
+      </if>
+      <if test="requestMessage != null">
+        request_message,
+      </if>
+      <if test="returnMessage != null">
+        return_message,
+      </if>
+      <if test="errorMessage != null">
+        error_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="runSheduleId != null">
+        #{runSheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="runTime != null">
+        #{runTime,jdbcType=BIGINT},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceName != null">
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="executorId != null">
+        #{executorId,jdbcType=VARCHAR},
+      </if>
+      <if test="executor != null">
+        #{executor,jdbcType=VARCHAR},
+      </if>
+      <if test="logField != null">
+        #{logField,jdbcType=VARCHAR},
+      </if>
+      <if test="evnId != null">
+        #{evnId,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPointStatus != null">
+        #{checkPointStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMessage != null">
+        #{requestMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="returnMessage != null">
+        #{returnMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceExecuteResult">
+    update interface_execute_log
+    <set>
+      <if test="runSheduleId != null">
+        run_shedule_id = #{runSheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="runTime != null">
+        run_time = #{runTime,jdbcType=BIGINT},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="interfaceName != null">
+        interface_name = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="executorId != null">
+        executor_id = #{executorId,jdbcType=VARCHAR},
+      </if>
+      <if test="executor != null">
+        executor = #{executor,jdbcType=VARCHAR},
+      </if>
+      <if test="logField != null">
+        log_field = #{logField,jdbcType=VARCHAR},
+      </if>
+      <if test="evnId != null">
+        evn_id = #{evnId,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPointStatus != null">
+        check_point_status = #{checkPointStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMessage != null">
+        request_message = #{requestMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="returnMessage != null">
+        return_message = #{returnMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        error_message = #{errorMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceExecuteResult">
+    update interface_execute_log
+    set run_shedule_id = #{runSheduleId,jdbcType=INTEGER},
+      run_time = #{runTime,jdbcType=BIGINT},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=INTEGER},
+      interface_name = #{interfaceName,jdbcType=VARCHAR},
+      executor_id = #{executorId,jdbcType=VARCHAR},
+      executor = #{executor,jdbcType=VARCHAR},
+      log_field = #{logField,jdbcType=VARCHAR},
+      evn_id = #{evnId,jdbcType=INTEGER},
+      batch_no = #{batchNo,jdbcType=VARCHAR},
+      check_point_status = #{checkPointStatus,jdbcType=VARCHAR},
+      request_message = #{requestMessage,jdbcType=LONGVARCHAR},
+      return_message = #{returnMessage,jdbcType=LONGVARCHAR},
+      error_message = #{errorMessage,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceExecuteResult">
+    update interface_execute_log
+    set run_shedule_id = #{runSheduleId,jdbcType=INTEGER},
+      run_time = #{runTime,jdbcType=BIGINT},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=INTEGER},
+      interface_name = #{interfaceName,jdbcType=VARCHAR},
+      executor_id = #{executorId,jdbcType=VARCHAR},
+      executor = #{executor,jdbcType=VARCHAR},
+      log_field = #{logField,jdbcType=VARCHAR},
+      evn_id = #{evnId,jdbcType=INTEGER},
+      batch_no = #{batchNo,jdbcType=VARCHAR},
+      check_point_status = #{checkPointStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

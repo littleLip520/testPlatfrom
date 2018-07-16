@@ -1,0 +1,7 @@
+.idea
+*.iml
+target
+build
+logs
+.eclipse
+LOG_FILE_IS_UNDEFINED*

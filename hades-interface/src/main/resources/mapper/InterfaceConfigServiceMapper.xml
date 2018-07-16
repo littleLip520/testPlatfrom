@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceConfigServiceMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfigServices">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="variable_id" jdbcType="INTEGER" property="variableId" />
+    <result column="variable_name" jdbcType="VARCHAR" property="variableName" />
+    <result column="result_field_type" jdbcType="VARCHAR" property="resultFieldType" />
+    <result column="result_field_name" jdbcType="VARCHAR" property="resultFieldName" />
+    <result column="result_field_order" jdbcType="VARCHAR" property="resultFieldOrder" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, config_id,variable_id, variable_name, result_field_type, result_field_name, result_field_order,
+    creator, create_time, updator, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interface_config_service
+    where status = 0 and  id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_config_service
+    where id = #{id,jdbcType=INTEGER}
+  </delete>-->
+
+  <update id="deleteByPrimaryKey">
+    UPDATE interface_config_service
+    SET status = -99 where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfigServices">
+    insert into interface_config_service (id, config_id,variable_id, variable_name,
+      result_field_type, result_field_name, result_field_order, 
+      creator, create_time, updator, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{configId,jdbcType=INTEGER},#{variableId,jdbcType=INTEGER}, #{variableName,jdbcType=VARCHAR},
+      #{resultFieldType,jdbcType=VARCHAR}, #{resultFieldName,jdbcType=VARCHAR}, #{resultFieldOrder,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfigServices">
+    insert into interface_config_service
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="variableId != null">
+        variable_id,
+      </if>
+      <if test="variableName != null">
+        variable_name,
+      </if>
+      <if test="resultFieldType != null">
+        result_field_type,
+      </if>
+      <if test="resultFieldName != null">
+        result_field_name,
+      </if>
+      <if test="resultFieldOrder != null">
+        result_field_order,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updator != null">
+        updator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="variableId != null">
+        #{variableId,jdbcType=INTEGER},
+      </if>
+      <if test="variableName != null">
+        #{variableName,jdbcType=VARCHAR},
+      </if>
+      <if test="resultFieldType != null">
+        #{resultFieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="resultFieldName != null">
+        #{resultFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="resultFieldOrder != null">
+        #{resultFieldOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfigServices">
+    update interface_config_service
+    <set>
+      <if test="configId != null">
+        config_id = #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="variableName != null">
+        variable_name = #{variableName,jdbcType=VARCHAR},
+      </if>
+      <if test="resultFieldType != null">
+        result_field_type = #{resultFieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="resultFieldName != null">
+        result_field_name = #{resultFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="resultFieldOrder != null">
+        result_field_order = #{resultFieldOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updator != null">
+        updator = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceConfigServices">
+    update interface_config_service
+    set config_id = #{configId,jdbcType=INTEGER},
+      variable_id = #{variableId},
+      variable_name = #{variableName,jdbcType=VARCHAR},
+      result_field_type = #{resultFieldType,jdbcType=VARCHAR},
+      result_field_name = #{resultFieldName,jdbcType=VARCHAR},
+      result_field_order = #{resultFieldOrder,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updator = #{updator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from interface_config_service
+    where status = 0
+    <if test="configId != null and configId != ''">
+      and config_id = #{configId}
+    </if>
+  </select>
+
+
+  <!--<delete id="deleteByKey">
+    delete from interface_config_service
+    where 1=1
+    <if test="configId != null and configId != ''">
+      and config_id = #{configId}
+    </if>
+  </delete>-->
+
+  <update id="deleteByKey">
+    UPDATE interface_config_service
+    SET status = -99 WHERE config_id = #{configId}
+  </update>
+</mapper>

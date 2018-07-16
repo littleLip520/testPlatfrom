@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceGlobalVariableMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceGlobalVariable">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="field_value" jdbcType="VARCHAR" property="fieldValue" />
+    <result column="display_value" jdbcType="VARCHAR" property="displayValue" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, case_id, field_name, field_value, display_value, creator, create_time, updator,
+    update_time,status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interface_global_variable
+    where status = 0 and id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from interface_global_variable
+    WHERE status = 0
+    <if test="caseId!=null">
+      AND case_id = #{caseId}
+    </if>
+  </select>
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_global_variable
+    where id = #{id,jdbcType=INTEGER}
+  </delete>-->
+<update id="deleteByPrimaryKey">
+  UPDATE interface_global_variable
+  SET status = -99 WHERE id = #{id,jdbcType=INTEGER}
+</update>
+
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceGlobalVariable">
+    insert into interface_global_variable (id, case_id, field_name,
+      field_value, display_value, creator, 
+      create_time, updator, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{fieldName,jdbcType=VARCHAR},
+      #{fieldValue,jdbcType=VARCHAR}, #{displayValue,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="getListByIds" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM interface_global_variable WHERE status = 0
+    <if test="list != null and list.size > 0">
+      AND id IN
+      <foreach collection="list" item="id" open="(" close=")" index="index" separator=",">
+        #{id}
+      </foreach>
+    </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceGlobalVariable">
+    insert into interface_global_variable
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="fieldName != null">
+        field_name,
+      </if>
+      <if test="fieldValue != null">
+        field_value,
+      </if>
+      <if test="displayValue != null">
+        display_value,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updator != null">
+        updator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null">
+        #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="displayValue != null">
+        #{displayValue,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceGlobalVariable">
+    update interface_global_variable
+    <set>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="fieldName != null">
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null">
+        field_value = #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="displayValue != null">
+        display_value = #{displayValue,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updator != null">
+        updator = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceGlobalVariable">
+    update interface_global_variable
+    set case_id = #{caseId,jdbcType=INTEGER},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      field_value = #{fieldValue,jdbcType=VARCHAR},
+      display_value = #{displayValue,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updator = #{updator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

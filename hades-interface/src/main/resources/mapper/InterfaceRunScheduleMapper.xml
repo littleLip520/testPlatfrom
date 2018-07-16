@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xforceplus.hades.dao.InterfaceRunScheduleMapper">
+  <resultMap id="BaseResultMap" type="com.xforceplus.hades.interfaceMgmt.domain.InterfaceRunSchedule">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="schedule_name" jdbcType="VARCHAR" property="scheduleName" />
+    <result column="last_begin_time" jdbcType="TIMESTAMP" property="lastBeginTime" />
+    <result column="last_end_time" jdbcType="TIMESTAMP" property="lastEndTime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="include_case_id" jdbcType="VARCHAR" property="includeCaseId" />
+    <result column="is_open" jdbcType="VARCHAR" property="isOpen" />
+    <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="env_id" jdbcType="INTEGER" property="envId" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="timer_time" jdbcType="VARCHAR" property="timerTime" />
+    <result column="timer_sum" jdbcType="INTEGER" property="timerSum" />
+    <result column="timer_interval" jdbcType="INTEGER" property="timerInterval" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, schedule_name, last_begin_time, last_end_time, status, include_case_id, is_open, 
+    cron_expression, env_id, batch_no, timer_time, timer_sum, timer_interval, create_user, 
+    create_time, update_user, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interface_run_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interface_run_schedule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceRunSchedule">
+    insert into interface_run_schedule (id, schedule_name, last_begin_time, 
+      last_end_time, status, include_case_id, 
+      is_open, cron_expression, env_id, 
+      batch_no, timer_time, timer_sum, 
+      timer_interval, create_user, create_time, 
+      update_user, update_time, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{scheduleName,jdbcType=VARCHAR}, #{lastBeginTime,jdbcType=TIMESTAMP}, 
+      #{lastEndTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{includeCaseId,jdbcType=VARCHAR}, 
+      #{isOpen,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR}, #{envId,jdbcType=INTEGER}, 
+      #{batchNo,jdbcType=VARCHAR}, #{timerTime,jdbcType=VARCHAR}, #{timerSum,jdbcType=INTEGER}, 
+      #{timerInterval,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceRunSchedule">
+    insert into interface_run_schedule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="scheduleName != null">
+        schedule_name,
+      </if>
+      <if test="lastBeginTime != null">
+        last_begin_time,
+      </if>
+      <if test="lastEndTime != null">
+        last_end_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="includeCaseId != null">
+        include_case_id,
+      </if>
+      <if test="isOpen != null">
+        is_open,
+      </if>
+      <if test="cronExpression != null">
+        cron_expression,
+      </if>
+      <if test="envId != null">
+        env_id,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="timerTime != null">
+        timer_time,
+      </if>
+      <if test="timerSum != null">
+        timer_sum,
+      </if>
+      <if test="timerInterval != null">
+        timer_interval,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleName != null">
+        #{scheduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBeginTime != null">
+        #{lastBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEndTime != null">
+        #{lastEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="includeCaseId != null">
+        #{includeCaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null">
+        #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="envId != null">
+        #{envId,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="timerTime != null">
+        #{timerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timerSum != null">
+        #{timerSum,jdbcType=INTEGER},
+      </if>
+      <if test="timerInterval != null">
+        #{timerInterval,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceRunSchedule">
+    update interface_run_schedule
+    <set>
+      <if test="scheduleName != null">
+        schedule_name = #{scheduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBeginTime != null">
+        last_begin_time = #{lastBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastEndTime != null">
+        last_end_time = #{lastEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="includeCaseId != null">
+        include_case_id = #{includeCaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="isOpen != null">
+        is_open = #{isOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="envId != null">
+        env_id = #{envId,jdbcType=INTEGER},
+      </if>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="timerTime != null">
+        timer_time = #{timerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timerSum != null">
+        timer_sum = #{timerSum,jdbcType=INTEGER},
+      </if>
+      <if test="timerInterval != null">
+        timer_interval = #{timerInterval,jdbcType=INTEGER},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xforceplus.hades.interfaceMgmt.domain.InterfaceRunSchedule">
+    update interface_run_schedule
+    set schedule_name = #{scheduleName,jdbcType=VARCHAR},
+      last_begin_time = #{lastBeginTime,jdbcType=TIMESTAMP},
+      last_end_time = #{lastEndTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      include_case_id = #{includeCaseId,jdbcType=VARCHAR},
+      is_open = #{isOpen,jdbcType=VARCHAR},
+      cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      env_id = #{envId,jdbcType=INTEGER},
+      batch_no = #{batchNo,jdbcType=VARCHAR},
+      timer_time = #{timerTime,jdbcType=VARCHAR},
+      timer_sum = #{timerSum,jdbcType=INTEGER},
+      timer_interval = #{timerInterval,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
